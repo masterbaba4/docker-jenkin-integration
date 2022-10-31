@@ -4,7 +4,7 @@ ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
 COPY target/sample_dev-0.0.1-SNAPSHOT.jar sampledev.jar
 EXPOSE 3000
-ADD target/sampledev.jar sampledev.jar
+COPY target/sampledev.jar sampledev.jar
 ENTRYPOINT exec java $JAVA_OPTS -jar sampledev.jar
 # For Spring-Boot project, use the entrypoint below to reduce Tomcat startup time.
 #ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar sampledev.jar
