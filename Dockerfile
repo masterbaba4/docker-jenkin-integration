@@ -1,11 +1,12 @@
-FROM maven:jdk-17.0.5.8-hotspot as stage1
-RUN -f pom.xml clean package
+# FROM maven:jdk-17.0.5.8-hotspot as stage1
+
 FROM openjdk:11
 VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
 ONBUILD ADD target/sample_dev-0.0.1-SNAPSHOT.jar docker-jenkins-integration.jar
 COPY --from=stage1 target/sample_dev-0.0.1-SNAPSHOT.jar docker-jenkins-integration.jar
+RUN -f pom.xml clean package
 EXPOSE 8080
 # ENTRYPOINT exec java $JAVA_OPTS -jar docker-jenkins-integration.jar
 # For Spring-Boot project, use the entrypoint below to reduce Tomcat startup time.
