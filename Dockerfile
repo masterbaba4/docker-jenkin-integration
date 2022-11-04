@@ -6,7 +6,8 @@ ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
 WORKDIR /home/app
 COPY . /home/app/
-RUN mvn -f /home/app/pom.xml clean package
+# RUN mvn -f /home/app/pom.xml clean package
+RUN mvn clean install
 ONBUILD ADD target/sample_dev-0.0.1-SNAPSHOT.jar docker-jenkins-integration.jar
 # # COPY  target/sample_dev-0.0.1-SNAPSHOT.jar docker-jenkins-integration.jar
 # # RUN -f pom.xml clean package
