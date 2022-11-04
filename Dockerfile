@@ -4,14 +4,15 @@ FROM openjdk:11
 VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
+WORKDIR /home/app
+COPY . /home/app/
+RUN mvn -f /home/app/pom.xml clean package
 ONBUILD ADD target/sample_dev-0.0.1-SNAPSHOT.jar docker-jenkins-integration.jar
 # # COPY  target/sample_dev-0.0.1-SNAPSHOT.jar docker-jenkins-integration.jar
 # # RUN -f pom.xml clean package
 EXPOSE 5002
 
-WORKDIR /home/app
-COPY . /home/app/
-RUN mvn -f /home/app/pom.xml clean package
+
 
 # # ENTRYPOINT exec java $JAVA_OPTS -jar docker-jenkins-integration.jar
 # # For Spring-Boot project, use the entrypoint below to reduce Tomcat startup time.
