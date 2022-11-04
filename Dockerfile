@@ -1,4 +1,4 @@
-# FROM maven:jdk-17.0.5.8-hotspot as stage1
+FROM maven:jdk-17.0.5.8-hotspot as stage1
 
 FROM openjdk:11
 VOLUME /tmp
